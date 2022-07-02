@@ -11,3 +11,8 @@ release-builds
 *.exe
 *.pem
 *_test.go
+
+
+# Exception
+!btdaemon.exe
+!mkcert.exe
