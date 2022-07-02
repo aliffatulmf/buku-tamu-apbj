@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Instansi</title>
+
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" href="/assets/fonts/montserrat/montserrat.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/vendors/toastify/toastify.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo text-center">
+                            <h1 style="font-family: 'Montserrat', sans-serif; font-size: 120%;">Buku Tamu</h1>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                {{ template "base/sidebar.html" .}}
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+            <div class="page-heading">
+                <!-- <h3>Detail Instansi</h3> -->
+            </div>
+            <div class="page-content">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="">Detail Instansi {{ .data.AgencyName }}</h3>
+                            <!-- <p class="text-subtitle text-muted">Kamu bisa ubah datanya.</p>
+                            <div class="alert alert-danger text-center"></i>
+                                Gagal
+                            </div> -->
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <form id="instansi_form" class="form form-horizontal" method="post"
+                                    action="/instansi/terdaftar/{{ .data.ID }}">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>ID Instansi</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-icon-left">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" id="first-name-icon" {{
+                                                            if .data }} value="{{ .data.ID }}" {{ end }} placeholder="ID" readonly>
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-list"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Nama Instansi</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-icon-left">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" placeholder="Nama"
+                                                            id="first-name-icon" name="name" {{ if .data }}
+                                                            value="{{ .data.AgencyName }}" {{ end }} {{ if .success }}
+                                                            disabled {{ end }}>
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-building"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Email -->
+                                            <div class="col-md-4">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-icon-left">
+                                                    <div class="position-relative">
+                                                        <input type="email" class="form-control" id="first-name-icon"
+                                                            name="email" {{ if .data }} value="{{ .data.AgencyEmail }}"
+                                                            {{ end }} {{ if .success }} disabled {{ end }} placeholder="Email">
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-envelope"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Telephone -->
+                                            <div class="col-md-4">
+                                                <label>No. Telepon</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-icon-left">
+                                                    <div class="position-relative">
+                                                        <input type="number" class="form-control" id="first-name-icon"
+                                                            name="telephone" {{ if .data }}
+                                                            value="{{ .data.AgencyTelephone }}" {{ end }} {{ if .success
+                                                            }} disabled {{ end }} placeholder="Telepon">
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-telephone"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Tanggal Dibuat</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-icon-left">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" id="first-name-icon" {{
+                                                            if .data }}
+                                                            value="{{ .data.CreatedAt.Format `Monday, _2 January 2006 - 03:04:05 PM` }}"
+                                                            {{ end }} placeholder="Taggal Dibuat" readonly>
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-clock"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Terakhir Diubah</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-icon-left">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" id="first-name-icon" {{
+                                                            if .data }}
+                                                            value="{{ .data.UpdatedAt.Format `Monday, _2 January 2006 - 03:04:05 PM` }}"
+                                                            {{ end }} placeholder="Tanggal Diubah" readonly>
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-clock"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-sm-start">
+                                            <!-- <button id="delete_instansi" class="btn btn-danger me-1 mb-1" type="button" {{ if .success }} disabled {{ end }}>
+                                                Hapus Instansi
+                                            </button> -->
+                                        </div>
+                                        <div class="col d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1" {{ if .success }}
+                                                disabled {{ end }}>Ubah</button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1" {{ if
+                                                .success }} disabled {{ end }}>Hapus
+                                                Perubahan
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/vendors/toastify/toastify.js"></script>
+        <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/mazer.js"></script>
+        <script src="/assets/fontawesome/js/all.min.js"></script>
+        <!-- <script>
+            $("#delete_instansi").click(function () {
+                $.ajax({
+                    url: "/instansi/terdaftar/{{ .data.ID }}",
+                    method: "DELETE",
+                    success: function () {
+                        Toastify({
+                            text: "Data berhasil dihapus.\nKamu akan dialihkan dalam 3 detik.",
+                            duration: 3000,
+                            close: false,
+                            gravity: "top",
+                            position: "center",
+                            backgroundColor: "#4fbe87",
+                            callback: function () {
+                                window.location.href = "/instansi/terdaftar"
+                            }
+                        }).showToast();
+                    },
+                    error: function () {
+                        Toastify({
+                            text: "Data gagal dihapus",
+                            duration: 1000,
+                            close: false,
+                            gravity: "top",
+                            position: "center",
+                            backgroundColor: "#dc3545",
+                            callback: function () {
+                                window.location.href = ""
+                            }
+                        }).showToast();
+                    }
+                })
+            })
+        </script> -->
+
+        {{ if .success }}
+        <script>
+            Toastify({
+                text: "Berhasil",
+                duration: 1000,
+                close: false,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+                callback: function () {
+                    window.location.href = "/instansi/terdaftar"
+                }
+            }).showToast();
+        </script>
+        {{ end }}
+        {{ if .error }}
+        <script>
+            Toastify({
+                text: "Berhasil",
+                duration: 1000,
+                close: false,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#dc3545",
+                callback: function () {
+                    window.location.href = "/instansi/terdaftar"
+                }
+            }).showToast();
+        </script>
+        {{ end }}
+</body>

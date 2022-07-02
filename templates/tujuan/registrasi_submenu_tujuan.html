@@ -1,0 +1,70 @@
+{{ template "base/main_top.html" .}}
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+<div class="page-heading">
+    <h3>Registrasi Tujuan Baru</h3>
+</div>
+<div class="page-content">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Form</h4>
+                {{ if .is_not_ok }}
+                <div class="alert alert-danger"><i class="bi bi-x-circle"></i> Menu gagal dibuat, coba lagi. </div>
+                {{ end }}
+                {{ if .is_ok }}
+                <div class="alert alert-success"><i class="bi bi-x-circle"></i> Menu berhasil dibuat.</div>
+                {{ end }}
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <form class="form form-horizontal" method="post" action="/web/tujuan-submenu/registrasi"
+                        enctype="multipart/form-data">
+                        <div class="form-body">
+                            <div class="row">
+                                <!-- Name -->
+                                <div class="col-md-4">
+                                    <label>Main</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <select class="choices form-select" name="destination_menu">
+                                            {{ range $i, $v := .data.menu}}
+                                            <option value="{{ $v.ID }}">{{ $v.DestinationName }}</option>
+                                            {{ end }}
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Sub Menu -->
+                                <div class="col-md-4">
+                                    <label>Submenu</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="..."
+                                                id="first-name-icon" name="destination_sub_menu">
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-signpost"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">Kirim</button>
+                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Hapus
+                                        Perubahan</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ template "base/main_bottom.html" .}}

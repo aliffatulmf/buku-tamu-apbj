@@ -1,0 +1,144 @@
+{{ define "base/sidebar.html" }}
+<div class="sidebar-menu">
+    <ul class="menu">
+        <!-- <li class="sidebar-title">Menu</li> -->
+
+        <li class="sidebar-item">
+            <a href="/" class='sidebar-link'>
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <!-- Pemda -->
+        <li class="sidebar-item" id="menu-pemda">
+            <a href="/pemda/terdaftar" class="sidebar-link">
+                <i class="fa-solid fa-building-user"></i>
+                <span>Pemda</span>
+            </a>
+        </li>
+        <!-- <li class="sidebar-item has-sub" id="menu-pemda">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-building-user"></i>
+                <span>Pemda</span>
+            </a>
+            <ul class="submenu">
+                <li class="submenu-item " id="submenu-pemda-1">
+                    <a href="/pemda/registrasi">Registrasi</a>
+                </li>
+                <li class="submenu-item" id="submenu-pemda-2">
+                    <a href="/pemda/terdaftar">Terdaftar</a>
+                </li>
+            </ul>
+        </li> -->
+        <!-- Penyedia -->
+        <li class="sidebar-item" id="menu-provider">
+            <a href="/penyedia/terdaftar" class="sidebar-link">
+                <i class="fa-solid fa-building-user"></i>
+                <span>Penyedia</span>
+            </a>
+        </li>
+<!--        <li class="sidebar-item has-sub" id="menu-provider">-->
+<!--            <a href="#" class='sidebar-link'>-->
+<!--                <i class="fa-solid fa-building-user"></i>-->
+<!--                <span>Penyedia</span>-->
+<!--            </a>-->
+<!--            <ul class="submenu">-->
+<!--                <li class="submenu-item " id="submenu-provider-1">-->
+<!--                    <a href="/penyedia/registrasi">Registrasi</a>-->
+<!--                </li>-->
+
+<!--                <li class="submenu-item " id="submenu-provider-2">-->
+<!--                    <a href="/penyedia/terdaftar">Terdaftar</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </li>-->
+        <!-- Instansi -->
+        <li class="sidebar-item" id="menu-instansi">
+            <a href="/instansi/terdaftar" class="sidebar-link">
+                <i class="fa-solid fa-building"></i>
+                <span>Instansi</span>
+            </a>
+        </li>
+        <!-- <li class="sidebar-item has-sub" id="menu-instansi">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-building"></i>
+                <span>Instansi</span>
+            </a>
+            <ul class="submenu">
+                <li class="submenu-item " id="submenu-instansi-1">
+                    <a href="/instansi/registrasi">Registrasi</a>
+                </li>
+
+                <li class="submenu-item " id="submenu-instansi-2">
+                    <a href="/instansi/terdaftar">Terdaftar</a>
+                </li>
+            </ul>
+        </li>
+        -->
+        <li class="sidebar-item has-sub" id="menu-pokja">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-list-check"></i>
+                <span>Pokja</span>
+            </a>
+            <ul class="submenu">
+                <li class="submenu-item " id="submenu-pokja-1">
+                    <a href="/pokja/registrasi">Registrasi</a>
+                </li>
+
+                <li class="submenu-item " id="submenu-pokja-2">
+                    <a href="/pokja/terdaftar">Terdaftar</a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Pokja
+        <li class="sidebar-item" id="menu-pokja">
+            <a href="/pokja/terdaftar" class="sidebar-link">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Pokja Status</span>
+            </a>
+        </li> -->
+        <!-- Credits -->
+        <li class="sidebar-item" id="menu-credits">
+            <a href="/credits" class="sidebar-link">
+                <i class="fa-solid fa-medal"></i>
+                <span>Tentang</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<script defer type="module">
+    switch (window.location.pathname) {
+        case "/instansi/registrasi":
+            $("#menu-instansi").even().addClass("active")
+            $("#submenu-instansi-1").even().addClass("active")
+            break
+        case "/instansi/terdaftar":
+            $("#menu-instansi").even().addClass("active")
+            $("#submenu-instansi-2").even().addClass("active")
+            break
+        case "/pemda/registrasi":
+            $("#menu-pemda").even().addClass("active")
+            $("#submenu-pemda-1").even().addClass("active")
+            break
+        case "/pemda/terdaftar":
+            $("#menu-pemda").even().addClass("active")
+            $("#submenu-pemda-2").even().addClass("active")
+            break
+        case "/penyedia/registrasi":
+            $("#menu-provider").even().addClass("active")
+            $("#submenu-provider-1").even().addClass("active")
+            break
+        case "/penyedia/terdaftar":
+            $("#menu-provider").even().addClass("active")
+            $("#submenu-provider-2").even().addClass("active")
+            break
+        case "/pokja/terdaftar":
+            $("#menu-pokja").even().addClass("active")
+            break
+        case "/credits":
+            $("#menu-credits").even().addClass("active")
+            break
+    }
+</script>
+{{ end }}

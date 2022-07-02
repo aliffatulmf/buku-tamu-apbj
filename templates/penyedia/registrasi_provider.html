@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Penyedia</title>
+
+    <!-- Include Choices CSS -->
+    <link rel="stylesheet" href="/assets/vendors/choices.js/choices.min.css" />
+
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" href="/assets/fonts/montserrat/montserrat.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/vendors/toastify/toastify.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/all.min.css">
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="">
+        <div class="container">
+            <div class="page-heading mt-3">
+                <section class="bootstrap-select">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col text-start align-self-center">
+                                            <h2 class="text-uppercase" id="form" style="font-family: 'Montserrat';">Penyedia</h2>
+                                        </div>
+                                        <div class="col text-end align-self-center">
+                                            <div class="container">
+                                                <a href="/user"><i class="bi bi-chevron-left"> Kembali</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li>Tanda <code>*</code> wajib diisi.</li>
+                                        <li>Jika webcam tidak muncul, tutup window lalu buka kembali. Atau, klik tombol
+                                            "Muat Ulang Kamera".</li>
+                                    </ul>
+
+                                    {{ if .error }}
+                                    <div class="alert alert-danger text-center">
+                                        Gagal
+                                    </div>
+                                    <script>
+                                        setTimeout(function () {
+                                            window.location.href = ""
+                                        }, 1000)
+                                    </script>
+                                    {{ end }}
+
+                                    {{ if .success }}
+                                    <div class="alert alert-success text-center">
+                                        Berhasil
+                                    </div>
+                                    <script>
+                                        setTimeout(function () {
+                                            window.location.href = window.location.origin + "/user"
+                                        }, 1000)
+                                    </script>
+                                    {{ end }}
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form form-horizontal" method="post" action="/penyedia/registrasi"
+                                            enctype="multipart/form-data">
+                                            <div class="form-body">
+                                                <div class="row">
+                                                    <!-- Nama -->
+                                                    <div class="col-md-4">
+                                                        <label>Nama <code>*</code></label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control" name="nama"
+                                                                    placeholder="" {{ if ne .success .error }} disabled {{ end }}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Telephone -->
+                                                    <div class="col-md-4">
+                                                        <label>No. Telepon <code>*</code></label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <div class="position-relative">
+                                                                <input type="number" class="form-control" name="telepon"
+                                                                    placeholder="" {{ if ne .success .error }} disabled {{ end }}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Company -->
+                                                    <div class="col-md-4">
+                                                        <label>Nama Perusahaan <code>*</code></label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control" name="company"
+                                                                    placeholder="" {{ if ne .success .error }} disabled {{ end }}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Keterangan -->
+                                                    <div class="col-md-4">
+                                                        <label>Keterangan</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control"
+                                                                    name="keterangan" placeholder="" {{ if ne .success .error }}
+                                                                    disabled {{ end }}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Tujuan -->
+                                                    <div class="col-md-4">
+                                                        <label>Tujuan <code>*</code></label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <select class="choices form-select removable" name="tujuan"
+                                                                id="select-tujuan" {{ if ne .success .error }} disabled {{ end }}>
+                                                                {{ if .data }}
+                                                                {{ range $i, $v := .data.destination }}
+                                                                <option value="{{ $v.DestinationName }}">{{
+                                                                    $v.DestinationName }}
+                                                                </option>
+                                                                {{ end }}
+                                                                {{ end }}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Konsultasi -->
+                                                    <div class="col-md-4 hidden" id="label-konsultasi">
+                                                        <label>Konsultasi <code>*</code></label>
+                                                    </div>
+                                                    <div class="col-md-8 hidden" id="form-konsultasi">
+                                                        <div class="form-group">
+                                                            <select class="choices form-select removable"
+                                                                name="konsultasi" id="select-konsultasi">
+                                                                {{ if .data }}
+                                                                {{ range $i, $v := .data.consultation}}
+                                                                <option value="{{ $v.ConsultationName }}">{{
+                                                                    $v.ConsultationName }}
+                                                                </option>
+                                                                {{ end }}
+                                                                {{ end }}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Pokja -->
+                                                    <div class="col-md-4 hidden" id="label-pokja">
+                                                        <label>Pokja <code>*</code></label>
+                                                    </div>
+                                                    <div class="col-md-8 hidden" id="form-pokja">
+                                                        <div class="form-group">
+                                                            <select class="choices form-select removable" name="pokja"
+                                                                id="select-pokja">
+                                                                {{ if .data }}
+                                                                {{ range $i, $v := .data.pokja }}
+                                                                <option value="{{ $v.PokjaName }}">{{ $v.PokjaName }}
+                                                                </option>
+                                                                {{ end }}
+                                                                {{ end }}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Webcam -->
+                                                    <div class="col-md-4">
+                                                        <label>Webcam <code>*</code></label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <button type="button" class="btn btn-outline-primary block"
+                                                            data-bs-toggle="modal" data-bs-target="#border-less"
+                                                            id="camcam" {{ if ne .success .error }} disabled {{ end }} disabled>
+                                                            <i class="fa-solid fa-camera"></i> Buka Kamera
+                                                        </button>
+
+                                                        <!--BorderLess Modal Modal -->
+                                                        <div class="modal fade text-left modal-borderless"
+                                                            id="border-less" tabindex="-1" role="dialog"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-scrollable modal-fullscreen"
+                                                                role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Webcam</h5>
+                                                                        <button type="button" class="close rounded-pill"
+                                                                            data-bs-dismiss="modal" aria-label="Close">
+                                                                            <i data-feather="x"></i>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="image" id="image">
+                                                                        <div class="d-flex justify-content-md-around">
+                                                                            <h4>Camera</h4>
+                                                                            <h4>Captured</h4>
+                                                                        </div>
+                                                                        <div class="d-flex justify-content-md-between">
+                                                                            <video class="rounded" id="camera"
+                                                                                width="608" autoplay></video>
+                                                                            <canvas class="rounded"
+                                                                                id="result"></canvas>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button"
+                                                                            class="btn btn-primary ml-1"
+                                                                            onclick="take_snapshot()">
+                                                                            <span class="d-none d-sm-block">Ambil</span>
+                                                                        </button>
+                                                                        <button type="button"
+                                                                            class="btn btn-light-primary"
+                                                                            data-bs-dismiss="modal" id="webcam-close-btn">
+                                                                            <i class="bx bx-x d-block d-sm-none"></i>
+                                                                            <span class="d-none d-sm-block">Tutup</span>
+                                                                        </button>
+                                                                        <button type="button"
+                                                                            class="btn btn-light-secondary"
+                                                                            onclick="restart_camera()">Muat Ulang
+                                                                            Kamera</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="submit" class="btn btn-primary me-1 mb-1" {{ if
+                                                            .error }} disabled {{ end }} {{ if .success }} disabled {{
+                                                            end }}>Kirim
+                                                        </button>
+                                                        <a href="">
+                                                            <button type="button" id="btn-reset"
+                                                                class="btn btn-light-secondary me-1 mb-1">
+                                                                Atur Ulang
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Bootstrap Select end -->
+            </div>
+        </div>
+    </div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.numeric.min.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendors/toastify/toastify.js"></script>
+
+    <!-- Include Choices JavaScript -->
+    <script src="/assets/vendors/choices.js/choices.min.js"></script>
+    <script src="/assets/js/mazer.js"></script>
+    <script src="/assets/js/webcam-easy.min.js"></script>
+    <script src="/assets/fontawesome/js/all.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("input[name='telepon']").numeric({decimal: false, negative: false});
+        });
+    </script>
+
+    <script>
+        var nameFld = document.querySelector("input[name='nama']");
+        var teleFld = document.querySelector("input[name='telepon']");
+        var comFld = document.querySelector("input[name='company']");
+        var ketFld = document.querySelector("input[name='keterangan']");
+
+        nameFld.addEventListener("input", e => {
+            if (e.currentTarget.value.length > 0) {
+                nameFld.classList.remove("is-invalid");
+                nameFld.classList.add("is-valid");
+            } else {
+                nameFld.classList.remove("is-valid");
+                nameFld.classList.add("is-invalid");
+            }
+        });
+
+        teleFld.addEventListener("input", e => {
+            if (e.currentTarget.value.length > 8) {
+                teleFld.classList.remove("is-invalid");
+                teleFld.classList.add("is-valid");
+            } else {
+                teleFld.classList.remove("is-valid");
+                teleFld.classList.add("is-invalid");
+            }
+        });
+
+        comFld.addEventListener("input", e => {
+            if (e.currentTarget.value.length > 0) {
+                comFld.classList.remove("is-invalid");
+                comFld.classList.add("is-valid");
+            } else {
+                comFld.classList.remove("is-valid");
+                comFld.classList.add("is-invalid");
+            }
+        });
+
+        ketFld.addEventListener("input", e => {
+            if (e.currentTarget.value.length > 0) {
+                ketFld.classList.remove("is-invalid");
+                ketFld.classList.add("is-valid");
+            } else {
+                ketFld.classList.remove("is-valid");
+                ketFld.classList.add("is-invalid");
+            }
+        });
+    </script>
+
+    <!-- Webcam -->
+    <script>
+        const camera = document.getElementById("camera")
+        const canvas = document.getElementById("result")
+        const webcam = new Webcam(camera, 'user', canvas)
+        const urlParams = new URLSearchParams(window.location.search)
+
+        "{{ if eq .success .error }}"
+        start_camera()
+        "{{ end }}"
+
+        function start_camera() {
+            webcam.start()
+                .then(result => {
+                    Toastify({
+                        text: "Kamera berhasil diakses",
+                        duration: 1000,
+                        close: false,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#4fbe87",
+                    }).showToast()
+
+                    $("#camcam").prop("disabled", false)
+                })
+                .catch(err => {
+                    Toastify({
+                        text: "Terjadi kesalahan saat mengakses kamera",
+                        duration: 1000,
+                        close: false,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#dc3545",
+                    }).showToast()
+                })
+        }
+
+        function stop_camera() {
+            webcam.stop()
+        }
+
+        function take_snapshot() {
+            picture = webcam.snap()
+            $("#image").val(picture)
+
+            Toastify({
+                text: "Gambar berhasil diambil",
+                duration: 1000,
+                close: false,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#4fbe87",
+            }).showToast()
+        }
+
+        function restart_camera() {
+            stop_camera()
+            start_camera()
+        }
+
+
+    </script>
+
+    <script>
+        let choices = document.querySelectorAll('.choices');
+        let initChoice;
+        let selected = []
+
+        for (let i = 0; i < choices.length; i++) {
+            if (choices[i].classList.contains("removable")) {
+                initChoice = new Choices(choices[i],
+                    {
+                        delimiter: ',',
+                        editItems: false,
+                        maxItemCount: -1,
+                        removeItemButton: false,
+                        renderChoiceLimit: 5,
+                        searchResultLimit: 10,
+                    });
+
+                selected.push({ name: choices[i].id, element: initChoice })
+            } else {
+                initChoice = new Choices(choices[i]);
+            }
+        }
+
+        for (let i = 0; i < selected.length; i++) {
+            selected[i].element.removeActiveItems()
+        }
+
+        $("#select-tujuan").change(function (e) {
+            if (e.currentTarget.value == "ADVOKASI") {
+                $("#label-pokja").even().addClass("hidden")
+                $("#form-pokja").even().addClass("hidden")
+                $("#label-konsultasi").even().addClass("hidden")
+                $("#form-konsultasi").even().addClass("hidden")
+
+                for (let i = 0; i < selected.length; i++) {
+                    if (selected[i].name == "select-konsultasi") {
+                        selected[i].element.removeActiveItems()
+                    }
+
+                    if (selected[i].name == "select-pokja") {
+                        selected[i].element.removeActiveItems()
+                    }
+                }
+            }
+
+            if (e.currentTarget.value == "LPSE") {
+                $("#label-konsultasi").even().removeClass("hidden")
+                $("#form-konsultasi").even().removeClass("hidden")
+            } else {
+                $("#label-konsultasi").even().addClass("hidden")
+                $("#form-konsultasi").even().addClass("hidden")
+
+                for (let i = 0; i < selected.length; i++) {
+                    if (selected[i].name == "select-pokja") {
+                        selected[i].element.removeActiveItems()
+                    }
+                }
+            }
+
+            if (e.currentTarget.value == "POKJA") {
+                $("#label-pokja").even().removeClass("hidden")
+                $("#form-pokja").even().removeClass("hidden")
+            } else {
+                $("#label-pokja").even().addClass("hidden")
+                $("#form-pokja").even().addClass("hidden")
+
+                for (let i = 0; i < selected.length; i++) {
+                    if (selected[i].name == "select-konsultasi") {
+                        selected[i].element.removeActiveItems()
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

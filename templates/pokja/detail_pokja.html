@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pokja</title>
+
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" href="/assets/fonts/montserrat/montserrat.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/vendors/toastify/toastify.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <h1 style="font-family: 'Montserrat', sans-serif; font-size: 120%;">Buku Tamu</h1>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                {{ template "base/sidebar.html" .}}
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+            <!-- <div class="page-heading">
+                <h3>Detail Page</h3>
+            </div> -->
+            <div class="page-content">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Detail {{ .data.PokjaName }}</h3>
+                            <p class="text-muted">Dibuat pada {{ .data.CreatedAt.Format "02/01/2006 15:04:05" }}</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <form action="" method="post">
+                                <div class="card-body">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <input type="hidden" name="id" value="{{ .data.ID }}">
+                                            <input type="hidden" name="cstat" value="{{ .data.Status }}">
+                                            <div class="col-md-4">
+                                                <label>Nama</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group has-icon-left">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control-plaintext" value=": {{ .data.PokjaName }}"
+                                                            readonly>
+                                                        <div class="form-control-icon">
+                                                            <!--<i class="bi bi-person"></i>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Telephone -->
+                                            <div class="col-md-4">
+                                                <label>Status</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group has-icon-left">
+                                                    <div class="position-relative">
+                                                        <select class="form-select" name="ustat" id="ustat">
+                                                            <option value="true" {{ if eq .data.Status true }} selected
+                                                                {{ end }}>Aktif</option>
+                                                            <option value="false" {{ if eq .data.Status false }}
+                                                                selected {{ end }}>Non Aktif</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-sm-end">
+                                            <button id="pokja-update" class="btn btn-primary me-1 mb-1" type="submit">
+                                                Ubah
+                                            </button>
+                                            <button id="pokja-delete" class="btn btn-danger me-1 mb-1" type="button">
+                                                Hapus
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/vendors/toastify/toastify.js"></script>
+        <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/mazer.js"></script>
+        <script src="/assets/fontawesome/js/all.min.js"></script>
+        <script>
+            $("#pokja-delete").click(function () {
+                $.ajax({
+                    url: "/pokja/terdaftar/{{ .data.ID }}",
+                    method: "DELETE",
+                    success: function () {
+                        Toastify({
+                            text: "Berhasil",
+                            duration: 1000,
+                            close: false,
+                            gravity: "top",
+                            position: "center",
+                            backgroundColor: "#4fbe87",
+                            callback: function () {
+                                window.location.href = "/pokja/terdaftar"
+                            }
+                        }).showToast();
+
+                        $("#pokja-update").prop("disabled", true)
+                        $("#pokja-delete").prop("disabled", true)
+                    },
+                    error: function () {
+                        Toastify({
+                            text: "Gagal",
+                            duration: 1000,
+                            close: false,
+                            gravity: "top",
+                            position: "center",
+                            backgroundColor: "#dc3545",
+                            callback: function () {
+                                window.location.href = ""
+                            }
+                        }).showToast();
+                    }
+                })
+            })
+        </script>
+</body>

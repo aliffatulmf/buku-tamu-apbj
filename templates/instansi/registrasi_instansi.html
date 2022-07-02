@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Instansi</title>
+
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" href="/assets/fonts/montserrat/montserrat.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+
+<body>
+<div id="app">
+    <div id="sidebar" class="active">
+        <div class="sidebar-wrapper active">
+            <div class="sidebar-header">
+                <div class="d-flex justify-content-between">
+                    <div class="logo text-center">
+                        <h1 style="font-family: 'Montserrat', sans-serif; font-size: 120%;">Buku Tamu</h1>
+                    </div>
+                    <div class="toggler">
+                        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar -->
+            {{ template "base/sidebar.html" .}}
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+    </div>
+    <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+        <div class="page-heading">
+            <h3>Registrasi instansi baru</h3>
+        </div>
+        <div class="page-content">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Form</h4>
+                        {{ if .error }}
+                        <div class="alert alert-danger"> Datamu gagal disimpan, pastikan
+                            datamu
+                            benar.
+                        </div>
+                        {{ end }}
+                        {{ if .success }}
+                        <div class="alert alert-success"> Datamu berhasil dimasukkan.
+                            <br>
+                            Halaman akan dialihkan dalam 2 detik.
+                        </div>
+                        <script>
+                            setTimeout(function() {
+                                window.location.href = ""
+                            }, 2000)
+                        </script>
+                        {{ end }}
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-horizontal" id="form-registrasi" method="post" action="/instansi/registrasi"
+                                  enctype="multipart/form-data">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <!-- Name -->
+                                        <div class="col-md-4">
+                                            <label>Nama</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Nama"
+                                                           id="first-name-icon" name="name" {{ if .success }} disabled {{ end }}>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-building"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Email -->
+                                        <div class="col-md-4">
+                                            <label>Email (opsional)</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="admin@email.com"
+                                                           id="first-name-icon" name="email" {{ if .success }} disabled {{ end }}>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-envelope"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Telephone -->
+                                        <div class="col-md-4">
+                                            <label>No. Telepon (opsional)</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="number" class="form-control" placeholder="08123456789"
+                                                           id="first-name-icon" name="telephone" {{ if .success }} disabled {{ end }}>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-telephone"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Logo -->
+                                        <!-- <div class="col-md-4">
+                                            <label>Logo (opsional)</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="file" class="filepond image-preview-filepond" name="logo">
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1" {{ if .success }} disabled {{ end }}>Kirim</button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Hapus
+                                                Perubahan
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/mazer.js"></script>
+
+<script>
+</script>
+</body>

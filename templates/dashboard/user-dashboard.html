@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Epic-Themes">
+
+    <title>User Dashboard</title>
+
+    <!-- Loading Bootstrap -->
+    <link href="/assets/smart/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Template CSS -->
+    <link href="/assets/smart/css/style.css" rel="stylesheet">
+    <link href="/assets/smart/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/smart/css/animate.css" rel="stylesheet">
+    <link href="/assets/smart/css/style-magnific-popup.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/all.min.css">
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .zoom {
+            transition: ease-in-out 300ms;
+            cursor: pointer;
+        }
+
+        .zoom:hover {
+            transform: scale(1.2);
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- begin header -->
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-fixed-top">
+
+
+
+            <div class="container">
+
+                <!-- begin logo -->
+                <a class="navbar-brand" href="/user"><i class="bi bi-cursor"></i> Buku Tamu</a>
+                <!-- end logo -->
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><i class="bi bi-list"></i></span>
+                </button>
+
+                <!-- <div class="collapse navbar-collapse" id="navbarScroll">
+
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll justify-content-center">
+                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Our Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#how-it-works">How It Works</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+
+                </div> -->
+                <div class="col-md-3 text-end">
+                    <a href="javascript:window.open('', '_self').close();">
+                        <button id="exit-app" type="button" class="btn btn-sm btn-outline-light text-black-50"><i
+                                class="fa fa-power-off"></i> Keluar</button>
+                    </a>
+                    <!-- <a href="#"><button type="button" class="btn btn-primary">Sign-up</button></a> -->
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <!-- end header -->
+
+    <main>
+        <!--begin pricing section -->
+        <section class="section-white" id="pricing">
+
+            <!--begin container -->
+            <div class="container">
+
+                <!--begin row -->
+                <div class="row justify-content-evenly">
+
+                    <!--begin col-md-12 -->
+                    <div class="col-md-12 text-center padding-bottom-40">
+
+                        <h2>Masuk sebagai</h2>
+
+                    </div>
+                    <!--end col-md-12 -->
+
+                    <!--begin col-md-4-->
+                    <div class="col-md-4 zoom">
+
+                        <div class="price-box">
+
+                            <ul class="pricing-list">
+
+                                <li class="price-title">PEMDA</li>
+
+                                <li class="price-value"><i class="fa-solid fa-user-group"></i></li>
+
+                                <li class="price-subtitle"><br></li>
+
+                                <li class="price-tag-line"><a href="/pemda/registrasi">MASUK</a></li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <!--end col-md-4 -->
+
+                    <!--begin col-md-4-->
+                    <div class="col-md-4 zoom">
+
+                        <div class="price-box">
+
+                            <ul class="pricing-list">
+
+                                <li class="price-title white-text">PENYEDIA</li>
+
+                                <li class="price-value white-text"><i class="fa-solid fa-users"></i></li>
+
+                                <li class="price-subtitle white-text"><br></li>
+
+                                <li class="price-tag-line"><a href="/penyedia/registrasi">MASUK</a></li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <!--end col-md-4 -->
+
+                </div>
+                <!--end row -->
+
+            </div>
+            <!--end container -->
+
+        </section>
+        <!--end pricing section -->
+
+        <!--begin footer -->
+        {{/*
+        <div class="footer">
+
+            <!--begin container -->
+            <div class="container">
+
+                <!--begin row -->
+                <div class="row">
+
+                    <!--begin col-md-7 -->
+                    <div class="col-md-7">
+
+                        <!-- <p>© 2021 <span class="template-name">Smart</span>. Designed by Epic-Themes</p> -->
+
+                    </div>
+                    <!--end col-md-7 -->
+
+                    <!--begin col-md-5 -->
+                    <div class="col-md-5">
+
+                        <!--begin footer_social -->
+                        <ul class="footer_social">
+
+                            <!-- <li>Guest Book:</li> -->
+
+                            <!--                        <li><a href="#" class="twitter"><i class="bi bi-twitter"></i></a></li>-->
+
+                            <!--                        <li><a href="#" class="instagram"><i class="bi bi-instagram"></i></a></li>-->
+
+                            <!--                        <li><a href="#" class="whatsapp"><i class="bi bi-whatsapp"></i></a></li>-->
+
+                            <!--                        <li><a href="#" class="google"><i class="bi bi-google"></i></a></li>-->
+
+                            <!-- <li><a href="https://github.com/aliffatulmf" target="_blank" class="github"><i class="bi bi-github"></i></a></li> -->
+
+                        </ul>
+                        <!--end footer_social -->
+
+                    </div>
+                    <!--end col-md-5 -->
+
+                </div>
+                <!--end row -->
+
+            </div>
+            <!--end container -->
+
+        </div>
+        */}}
+        <!--end footer -->
+
+    </main>
+
+    <!-- Load JS here for greater good =============================-->
+    <script src="/assets/smart/js/jquery-3.6.0.min.js"></script>
+    <script src="/assets/smart/js/bootstrap.min.js"></script>
+    <script src="/assets/smart/js/jquery.scrollTo-min.js"></script>
+    <script src="/assets/smart/js/jquery.magnific-popup.min.js"></script>
+    <script src="/assets/smart/js/jquery.nav.js"></script>
+    <script src="/assets/smart/js/wow.js"></script>
+    <script src="/assets/smart/js/plugins.js"></script>
+    <script src="/assets/smart/js/custom.js"></script>
+    <script src="/assets/fontawesome/js/all.min.js"></script>
+
+</body>
+
+</html>

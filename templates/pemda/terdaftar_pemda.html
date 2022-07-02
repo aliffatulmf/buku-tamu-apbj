@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemda Terdaftar</title>
+
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" href="/assets/fonts/montserrat/montserrat.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo text-center">
+                            <h1 style="font-family: 'Montserrat', sans-serif; font-size: 120%;">Buku Tamu</h1>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                {{ template "base/sidebar.html" .}}
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-content">
+                <section class="section">
+                    <div class="col">
+                        <div class="col">
+                            <!-- Card -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h3>Daftar Pemda</h3>
+                                            <p class="text-muted">Maksimal 100 daftar terakhir.</p>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <p>
+                                                <button id="filter-button" class="btn btn-outline-primary" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#table-filter"
+                                                    aria-expanded="false" aria-controls="table-filter">
+                                                    <i class="bi bi-search"></i> Filter
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="collapse" id="table-filter">
+                                        <div class="card card-body">
+                                            <form action="" method="get">
+                                                <input type="hidden" name="qf" value="q">
+                                                <div class="form-group">
+                                                    <label>Nama</label>
+                                                    <div class="col-4">
+                                                        <input type="text" class="form-control" name="sbn">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label>Awal</label>
+                                                            <input type="date" class="form-control" name="from">
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Akhir</label>
+                                                            <input type="date" class="form-control" name="to">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label>Status</label>
+                                                            <select name="permission" class="form-select">
+                                                                <option value="">Semua</option>
+                                                                <option value="allowed">Diizinkan</option>
+                                                                <option value="notallowed">Tidak Diizinkan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                                    <button type="button" class="btn btn-light-secondary" id="reset">Atur Ulang</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-content">
+                                    <!-- Table with no outer spacing -->
+                                    <div class="">
+                                        <table class="table mb-0 table-lg">
+                                            <thead>
+                                                <tr>
+                                                    <th width="10%" class="text-center">NO</th>
+                                                    <th>Nama</th>
+                                                    <th>Instansi</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Tanggal</th>
+                                                    <th class="text-center">Detail</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{ range $i, $v := .data }}
+                                                <tr>
+                                                    <td class="text-bold-500" style="text-align: center;">
+                                                        {{ increment $i }}</td>
+                                                    <td>{{ .PemdaName }}</td>
+                                                    <td>{{ .Agency.AgencyName }}</td>
+                                                    {{ if eq .Verified true }}
+                                                    <td class="text-center">
+                                                        <span class="badge bg-success"><i class="fas fa-check"></i>
+                                                            Diizinkan</span>
+                                                    </td>
+                                                    {{ else }}
+                                                    <td class="text-center">
+                                                        <span class="badge bg-danger"><i class="fas fa-ban"></i> Tidak
+                                                            Diizinkan</span>
+                                                    </td>
+                                                    {{ end }}
+                                                    <td class="text-bold-500" style="text-align: center;">
+                                                        {{ .CreatedAt.Format "02 Jan 2006 03:04 PM" }}
+                                                    </td>
+                                                    <td style="text-align: center;"><a href="/pemda/terdaftar/{{ .ID }}"
+                                                            class="btn btn-primary"><i
+                                                                class="bi bi-pencil-square"></i>
+                                                            Buka</a>
+                                                    </td>
+                                                </tr>
+                                                {{ end }}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/mazer.js"></script>
+    <script src="/assets/fontawesome/js/all.min.js"></script>
+    <script>
+        var urlParams = new URLSearchParams(window.location.search)
+
+        if (urlParams.has("qf")) {
+            $("button#filter-button").click()
+        }
+
+        if (urlParams.has("sbn")) {
+            $("input[name=sbn]").val(urlParams.get("sbn"))
+        }
+
+        if (urlParams.has("from")) {
+            $("input[name=from]").val(urlParams.get("from"))
+        }
+
+        if (urlParams.has("to")) {
+            $("input[name=to]").val(urlParams.get("to"))
+        }
+
+        if (urlParams.has("permission")) {
+            $("option[value=" + urlParams.get("permission") + "]").prop("selected", true)
+        }
+    </script>
+    <script>
+        $("button#reset").click(function () {
+            window.location.href = "/pemda/terdaftar"
+        })
+    </script>
+</body>

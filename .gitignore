@@ -1,0 +1,13 @@
+.vscode
+.idea
+build
+media
+EXPORT
+webview
+node_modules
+release-builds
+
+*.db
+*.exe
+*.pem
+*_test.go

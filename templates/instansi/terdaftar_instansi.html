@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instansi Terdaftar</title>
+
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" href="/assets/fonts/montserrat/montserrat.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo text-center">
+                            <h1 style="font-family: 'Montserrat', sans-serif; font-size: 120%;">Buku Tamu</h1>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                {{ template "base/sidebar.html" .}}
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <!-- <h3>Terdaftar</h3> -->
+            </div>
+
+            <div class="page-content">
+                <section class="section">
+                    <div class="col">
+                        <div class="col">
+                            <!-- Card -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="">Daftar Instansi</h3>
+                                    <p class="text-muted">Total {{ len .data }} data aktif.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-content">
+
+                                    <div class="card-body">
+                                        <p>
+                                            <!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#table-filter" aria-expanded="false"
+                                                aria-controls="table-filter">
+                                                Filter
+                                            </button> -->
+                                        </p>
+                                        <div class="collapse" id="table-filter">
+                                            <div class="card card-body">
+                                                <form action="" method="get">
+                                                    <input type="hidden" name="qf" value="q">
+                                                    <div class="form-group">
+                                                        <label>Search by Name</label>
+                                                        <div class="col-4">
+                                                            <input type="text" class="form-control" name="sbn">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label>From</label>
+                                                                <input type="date" class="form-control" name="from">
+                                                            </div>
+                                                            <div class="col">
+                                                                <label>To</label>
+                                                                <input type="date" class="form-control" name="to">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary">Find</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Table with no outer spacing -->
+                                    <div class="">
+                                        <table class="table mb-0 table-lg" style="table-layout: fixed; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th width="10%">Nomor</th>
+                                                    <th width="45%">Nama Instansi</th>
+                                                    <th width="29%" style="text-align: center;">Terakhir Diperbarui</th>
+                                                    <th style="text-align: center;">Detail</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{ range $i, $v := .data }}
+                                                <tr>
+                                                    <td class="text-bold-500" style="text-align: center;">{{ increment
+                                                        $i }}
+                                                    </td>
+                                                    <td>{{ .AgencyName }}</td>
+                                                    <td class="text-bold-500" style="text-align: center;">{{
+                                                        .UpdatedAt.Format "_2 January 2006 - 3:04 PM" }}
+                                                    </td>
+                                                    <td style="text-align: center;"><a
+                                                            href="/instansi/terdaftar/{{ .ID }}"
+                                                            class="btn btn-sm btn-primary"><i
+                                                                class="bi bi-pencil-square"></i>
+                                                            Buka</a></td>
+                                                </tr>
+                                                {{ end }}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/mazer.js"></script>
+    <script src="/assets/fontawesome/js/all.min.js"></script>
+</body>

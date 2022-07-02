@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokja Terdaftar</title>
+
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" href="/assets/fonts/montserrat/montserrat.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo text-center">
+                            <h1 style="font-family: 'Montserrat', sans-serif; font-size: 120%;">Buku Tamu</h1>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                {{ template "base/sidebar.html" .}}
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-content">
+                <section class="section">
+                    <div class="col">
+                        <div class="col">
+                            <!-- Card -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h3>Daftar Pokja</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-content">
+                                    <!-- Table with no outer spacing -->
+                                    <div class="">
+                                        <table class="table mb-0 table-lg" style="table-layout: fixed; width: 100%;">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th width="120em" class="text-center">No</th>
+                                                    <th>Nama</th>
+                                                    <th>Status</th>
+                                                    <th>Terakhir Diubah</th>
+                                                    <th>Detail</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{ range $i, $v := .data }}
+                                                <tr class="text-center">
+                                                    <td class="text-bold-500">{{ increment $i }}</td>
+                                                    <td>{{ .PokjaName }}</td>
+                                                    {{ if .Status }}
+                                                    <td>
+                                                        <span class="badge bg-success"><i class="fas fa-check"></i> Aktif</span>
+                                                    </td>
+                                                    {{ else }}
+                                                    <td>
+                                                        <span class="badge bg-danger"><i class="fas fa-ban"></i> Non Aktif</span>
+                                                    </td>
+                                                    {{ end }}
+                                                    <td>
+                                                        {{ .UpdatedAt.Format "01 Jan 2006 03:04 PM" }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="/pokja/terdaftar/{{ .ID }}"
+                                                            class="btn btn-primary"><i
+                                                                class="bi bi-pencil-square"></i>
+                                                            Buka</a>
+                                                    </td>
+                                                </tr>
+                                                {{ end }}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/mazer.js"></script>
+    <script src="/assets/fontawesome/js/all.min.js"></script>
+</body>

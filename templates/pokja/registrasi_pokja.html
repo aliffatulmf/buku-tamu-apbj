@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Penyedia</title>
+
+    <!-- Include Choices CSS -->
+    <link rel="stylesheet" href="/assets/vendors/choices.js/choices.min.css" />
+
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" href="/assets/fonts/montserrat/montserrat.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/vendors/toastify/toastify.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <h1 style="font-family: 'Montserrat', sans-serif; font-size: 120%;">Buku Tamu</h1>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                {{ template "base/sidebar.html" .}}
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <section class="bootstrap-select">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="" id="form">Pokja</h3>
+                                    <ul class="list-unstyled">
+                                        <li>Tanda <code>*</code> wajib diisi.</li>
+                                    </ul>
+
+                                    {{ if .errors }}
+                                    <div class="alert alert-danger text-center">
+                                        Gagal
+                                    </div>
+                                    <script>
+                                        setTimeout(function () {
+                                            window.location.href = window.location.origin + window.location.pathname
+                                        }, 1000)
+                                    </script>
+                                    {{ end }}
+
+                                    {{ if .success }}
+                                    <div class="alert alert-success text-center">
+                                        Berhasil
+                                    </div>
+                                    <script>
+                                        setTimeout(function () {
+                                            window.location.href = window.location.origin + "/pokja/terdaftar"
+                                        }, 1000)
+                                    </script>
+                                    {{ end }}
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form form-horizontal" method="post" action="/pokja/registrasi"
+                                            enctype="multipart/form-data">
+                                            <div class="form-body">
+                                                <div class="row">
+                                                    <!-- Nama -->
+                                                    <div class="col-md-4">
+                                                        <label>Nama <code>*</code></label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control" name="nama"
+                                                                    placeholder="" {{ if ne .success .errors }} disabled
+                                                                    {{ end }}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="submit" class="btn btn-primary me-1 mb-1" {{ if
+                                                            .errors }} disabled {{ end }}>
+                                                            Kirim
+                                                        </button>
+                                                        <a href="">
+                                                            <button type="button" id="btn-reset"
+                                                                class="btn btn-light-secondary me-1 mb-1" {{ if .errors
+                                                                }} disabled {{ end }}>
+                                                                Atur Ulang
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Bootstrap Select end -->
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendors/toastify/toastify.js"></script>
+
+    <!-- Include Choices JavaScript -->
+    <script src="/assets/vendors/choices.js/choices.min.js"></script>
+    <script src="/assets/js/mazer.js"></script>
+    <script src="/assets/fontawesome/js/all.min.js"></script>
+    <script>
+        var nameFld = document.querySelector("input[name=nama]")
+
+        nameFld.addEventListener("input", e => {
+            if (e.target.value.length < 1) {
+                nameFld.classList.remove("is-valid")
+                nameFld.classList.add("is-invalid")
+            } else {
+                nameFld.classList.remove("is-invalid")
+                nameFld.classList.add("is-valid")
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+{{ template "base/main_top.html" .}}
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+<div class="page-heading">
+    <h3>Registrasi Tujuan Baru</h3>
+</div>
+<div class="page-content">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Form</h4>
+                {{ if .is_not_ok }}
+                <div class="alert alert-danger"><i class="bi bi-x-circle"></i> Menu gagal dibuat, coba lagi. </div>
+                {{ end }}
+                {{ if .is_ok }}
+                <div class="alert alert-success"><i class="bi bi-x-circle"></i> Menu berhasil dibuat.</div>
+                {{ end }}
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <form class="form form-horizontal" method="post" action="/web/tujuan-menu/registrasi"
+                        enctype="multipart/form-data">
+                        <div class="form-body">
+                            <div class="row">
+                                <!-- Name -->
+                                <div class="col-md-4">
+                                    <label>Nama</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="..."
+                                                id="first-name-icon" name="destination_menu">
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-signpost"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">Kirim</button>
+                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Hapus
+                                        Perubahan</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Tujuan Utama Terdaftar</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <!-- Table with no outer spacing -->
+                    <table class="table mb-0 table-lg" style="table-layout: fixed; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Nomor</th>
+                                <th>Tujuan</th>
+                                <th>Tanggal Terdaftar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ range $i, $v := .data}}
+                            <tr>
+                                <td class="text-bold-500">{{  $i  }}</td>
+                                <td>{{ .DestinationName }}</td>
+                                <td class="text-bold-500">{{ .CreatedAt.Format "_2 January 2006" }}</td>
+                            </tr>
+                            {{ end }}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-metadata/dist/filepond-plugin-file-metadata.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<!-- toastify -->
+<script src="/assets/vendors/toastify/toastify.js"></script>
+<script>
+    // register desired plugins...
+    FilePond.registerPlugin(
+        FilePondPluginFileValidateType,
+        FilePondPluginImagePreview,
+        FilePondPluginFileEncode,
+        FilePondPluginFileMetadata,
+    );
+
+    // Filepond: Image Preview
+    FilePond.create(document.querySelector('input[type="file"]'), {
+        allowImagePreview: true,
+        allowImageFilter: false,
+        allowImageExifOrientation: false,
+        allowImageCrop: false,
+        imagePreviewMaxFileSize: "1MB",
+        acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+        storeAsFile: true,
+        allowFileEncode: true,
+        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+            // Do custom type detection here and return with promise
+            resolve(type);
+        })
+    });
+</script>
+{{ template "base/main_bottom.html" .}}

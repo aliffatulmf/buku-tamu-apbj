@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pemda</title>
+
+    <link rel="stylesheet" href="/assets/fonts/nunito/nunito.css">
+    <link rel="stylesheet" href="/assets/fonts/montserrat/montserrat.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/vendors/toastify/toastify.css">
+    <link rel="stylesheet" href="/assets/alertify/css/alertify.min.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <h1 style="font-family: 'Montserrat', sans-serif; font-size: 120%;">Buku Tamu</h1>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                {{ template "base/sidebar.html" .}}
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+            <!-- <div class="page-heading">
+                <h3>Detail Page</h3>
+            </div> -->
+            <div class="page-content">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="">Detail {{ .data.PemdaName }}</h3>
+                            <p class="text-muted text-start">
+                                <i class="bi bi-clock-history"></i>
+                                Created At {{ .data.CreatedAt.Format `Monday, 02 January 2006 03:04:05 PM` }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Nama</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control-plaintext"
+                                                        id="first-name-icon" value=": {{ .data.PemdaName }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Telephone -->
+                                        <div class="col-md-4">
+                                            <label>No. Telepon</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control-plaintext"
+                                                        id="first-name-icon" name="email" value=": {{ .data.Phone }}"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Instansi -->
+                                        <div class="col-md-4">
+                                            <label>Nama Instansi</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control-plaintext"
+                                                        id="first-name-icon" value=": {{ .data.Agency.AgencyName }}"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Verifikasi -->
+                                        <div class="col-md-4">
+                                            <label>Status</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    {{ if eq .data.Verified true }}
+                                                    : <span class="badge bg-success pt-2 pb-2 ps-4 pe-4"><i
+                                                            class="fas fa-check"></i> Diizinkan</span>
+                                                    {{ else }}
+                                                    : <span class="badge bg-danger pt-2 pb-2 ps-4 pe-4"><i
+                                                            class="fas fa-ban"></i> Tidak Diizinkan</span>
+                                                    {{ end }}
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Instansi Telepon</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control-plaintext"
+                                                        id="first-name-icon"
+                                                        value=": {{ .data.Agency.AgencyTelephone }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Instansi Email</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control-plaintext"
+                                                        id="first-name-icon" value=": {{ .data.Agency.AgencyEmail }}"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- SKPD -->
+                                        <div class="col-md-4">
+                                            <label>SKPD/OPD</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control-plaintext"
+                                                        id="first-name-icon" value=": {{ .data.SkpdOpd }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Tujuan -->
+                                        <div class="col-md-4">
+                                            <label>Tujuan</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control-plaintext"
+                                                        id="first-name-icon" value=": {{ .data.Destination }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{ if .data.Consultation }}
+                                        <!-- Consultation -->
+                                        <div class="col-md-4">
+                                            <label>Konsultasi</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control-plaintext"
+                                                        id="first-name-icon" value=": {{ .data.Consultation }}"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{ end }}
+                                        {{ if .data.Pokja }}
+                                        <!-- Pokja -->
+                                        <div class="col-md-4">
+                                            <label>Pokja</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control-plaintext"
+                                                        id="first-name-icon" value=": {{ .data.Pokja }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{ end }}
+                                        <!-- Foto -->
+                                        <div class="col-md-4">
+                                            <label>Foto</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative text-center">
+                                                    <img loading="lazy" class="rounded img-fluid"
+                                                        src="/{{ .data.Image }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col d-flex justify-content-sm-start">
+                                        <button id="delete_instansi" class="btn btn-danger me-1 mb-1" type="button" {{
+                                            if .success }} disabled {{ end }}>
+                                            <i class="bi bi-archive"></i>
+                                            Arsip
+                                        </button>
+                                        {{ if eq .data.Verified false }}
+                                        <button id="confirm" class="btn btn-success me-1 mb-1" type="button">
+                                            <i class="bi bi-check-circle"></i>
+                                            Izinkan
+                                        </button>
+                                        {{ end }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/vendors/toastify/toastify.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/alertify/js/alertify.min.js"></script>
+    <script src="/assets/js/mazer.js"></script>
+    <script src="/assets/fontawesome/js/all.min.js"></script>
+
+    <script>
+        $(window).on("load", () => {
+            $(".loader-wrapper").fadeOut("slow")
+        })
+    </script>
+
+    <script>
+        $("#confirm").click(function () {
+            $.ajax({
+                url: "/pemda/terdaftar/{{ .data.ID }}",
+                method: "PUT",
+                success: function () {
+                    Toastify({
+                        text: "Berhasil",
+                        duration: 1000,
+                        close: false,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#4fbe87",
+                        callback: function () {
+                            window.location.href = "/pemda/terdaftar"
+                        }
+                    }).showToast();
+
+                    $("#delete_instansi").prop("disabled", true);
+                    $("#action-confirm").prop("disabled", true);
+                }
+            });
+        });
+
+        $("#delete_instansi").click(function () {
+            console.log("{{ .data.ID }}")
+            alertify.confirm("Pilih OK untuk melanjutkan penghapusan.", function () {
+                $.ajax({
+                    url: "/pemda/terdaftar/{{ .data.ID }}",
+                    method: "DELETE",
+                    success: function () {
+                        Toastify({
+                            text: "Berhasil",
+                            duration: 2000,
+                            close: false,
+                            gravity: "top",
+                            position: "center",
+                            backgroundColor: "#4fbe87",
+                            callback: function () {
+                                window.location.href = "/pemda/terdaftar"
+                            }
+                        }).showToast();
+
+                        $("#delete_instansi").prop("disabled", true)
+                        $("#action-confirm").prop("disabled", true)
+                    },
+                    error: function () {
+                        Toastify({
+                            text: "Gagal",
+                            duration: 2000,
+                            close: false,
+                            gravity: "top",
+                            position: "center",
+                            backgroundColor: "#dc3545",
+                            callback: function () {
+                                window.location.href = ""
+                            }
+                        }).showToast();
+                    }
+                });
+            })
+                .set("closable", false)
+                .set({ title: "Notifikasi" })
+        });
+    </script>
+</body>
